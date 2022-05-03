@@ -105,3 +105,10 @@ void sApplicationData::reset()
     
     loadConfig(); // Config is alway ready
 }
+
+static string GetBaseApplicationInfo()
+{
+    string info = "DreamBigSemi Base Application Info String";
+
+    return info;
+}
