@@ -1,0 +1,68 @@
+AppLogger Logger;
+sApplicationData AppData;
+
+// ----------------------------------------------------------------------
+// Implementation of AccessFunctions
+// ----------------------------------------------------------------------
+
+AppLogger* GetLoggerPtr()
+{
+    return &Logger;
+}
+
+sAppData* GetAppDataPtr()
+{
+    return dynamic_cast<sAppData*>(AppData.Data);
+}
+
+sAppConfig* GetAppConfigPtr()
+{
+    return dynamic_cast<sAppConfig*>(AppData.Config);
+}
+
+sApplicationData* GetApplicationDataPtr()
+{
+    return &AppData;
+}
+
+// ----------------------------------------------------------------------
+// Implementation of AppUtility
+// ----------------------------------------------------------------------
+
+void InitLogger(const string& logName)
+{
+    AppLogger* logptr = GetLoggerPtr();
+    logptr->setLogName(logName);
+}
+
+void LoadCoreData()
+{
+    sApplicationData* applptr = GetApplicationDataPtr();
+    
+    applptr->setApplicationInfo(new sAppConfig, new sAppData);
+    applptr->load();
+}
+
+void RequestLicenseAgreement()
+{
+    sAppConfig* confptr = GetAppConfigPtr();
+    sApplicationData* applptr = GetApplicationDataPtr();
+
+    if (true == confptr->License.second) return;
+
+    LicenseDialog dlg;
+
+    if (QDialog::Accepted == dlg.exec())
+    {
+        confptr->License.second = true;
+        applptr->saveConfig();
+    }
+    else
+    {
+        exit(1);
+    }
+}
+
+// ----------------------------------------------------------------------
+// End
+// ----------------------------------------------------------------------
