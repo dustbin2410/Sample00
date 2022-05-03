@@ -63,6 +63,13 @@ void RequestLicenseAgreement()
     }
 }
 
+static string GetDefaultApplicationInfo()
+{
+    string info = "DreamBigSemi - Default Application Info String";
+
+    return info;
+}
+
 // ----------------------------------------------------------------------
 // End
 // ----------------------------------------------------------------------
