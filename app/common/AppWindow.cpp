@@ -35,3 +35,10 @@ string AppWindow::getAboutString() const
 {
     return MiscUtil::GetAboutString(m_AppName);
 }
+
+static string GetMainApplicationInfo()
+{
+    string info = "DreamBigSemi - Main Application Info String";
+
+    return info;
+}
